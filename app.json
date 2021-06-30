@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "projeto2",
-    "slug": "projeto2",
+    "name": "Marked",
+    "slug": "Marked",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon1.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#20E0EC"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

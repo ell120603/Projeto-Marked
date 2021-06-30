@@ -17,3 +17,67 @@
                 resizeMode='contain'/>
                 </TouchableOpacity>
             </View>
+
+
+
+
+            bolinhas
+             <View style={styles.categoriaContainer}>
+                <View style={styles.categoria} >
+                    <Icon  name="mobile-alt" size={35} color="#000000"
+                    style={{alignItems:'center',justifyContent:'center',marginLeft:20,marginTop:10, marginRight:5}}
+                    />
+                </View>
+                <View style={styles.categoria}/>
+                <View style={styles.categoria}/>
+                <View style={styles.categoria}/>
+            </View>
+                    categoriaContainer:{
+            flex:1,
+            justifyContent:'center',
+            alignItems:'center',
+            flexDirection:'row'
+        }
+
+        DUVIDA
+                    <Text style={styles.textDuvi}>Tema da duvida</Text>
+            <TextInput
+            style={styles.inputTema}
+            placeholder="EX. Forma de pagamento                         >"
+            autoCorrect={false}
+            onChangeText={()=>{}}
+            />
+
+        modal1
+        <View  style={styles.fake_post}>
+            <TouchableOpacity style={styles.button}  onPress={onOpen1}>
+                    <Text>Saiba mais</Text>
+                </TouchableOpacity>
+                <Modalize
+            ref={modalizeRefe1}
+            snapPoint={200}
+            HeaderComponent={
+                <View>
+                    <TouchableOpacity style={styles.buttonModal} onPress={onClose1}>
+                     <AntDesign name="closecircleo" size={28} color="black" 
+                    />
+                    </TouchableOpacity>
+                    <Text style={styles.headerModal}>
+                    Crie seu cadastro e anuncie já em  nosso site.
+                    </Text>
+                </View>
+            }
+            >
+            <View style={styles.modal}>
+                    <Text style={styles.textModal}>
+                        Faça seu pré-cadastro aqui no nosso app e anuncie 
+                        seus produtos agora em nosso site.
+                    </Text>
+                </View>
+            </Modalize>
+            </View>
+            images
+            'https://images.pexels.com/photos/752036/pexels-photo-752036.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    'https://images.pexels.com/photos/6144105/pexels-photo-6144105.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    'https://images.pexels.com/photos/1612353/pexels-photo-1612353.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    'https://images.pexels.com/photos/4173108/pexels-photo-4173108.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
