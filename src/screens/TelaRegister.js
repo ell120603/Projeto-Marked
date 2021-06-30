@@ -3,53 +3,78 @@ import { Text, StyleSheet, View, Image, TextInput, TouchableOpacity, KeyboardAvo
 import { ScrollView } from 'react-native-gesture-handler'
 import Header from '../componentes/Header'
 import axios from 'axios'
-export default function Register() {
-    const [email, setEmail] = useState(null)
-    const [nome, setNome] = useState(null)
-    const [usuario, setUsuario] = useState(null)
-    const [cpf, setCpf] = useState(null)
-    const [senha, setSenha] = useState(null)
-    const [errorEmail, setErrorEmail] = useState(null)
-    const [errorNome, setErrorNome] = useState(null)
-    const [errorCpf, setErrorCpf] = useState(null)
-    const [errorSenha, setErrorSenha] = useState(null)
-    const validar = () => {
-        let error = false
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (!re.test(String(email).toLowerCase())) {
-            setErrorEmail("prencha seu email")
-            error = true
-        } if (cpf == null) {
-            setErrorCpf('')
-            error = true
+export default class Register extends Component {
+    constructor(props) {
+        super(props)
+        this.state={
+            name_user:'',
+            email_user:'',
+            username_user:'',
+            password_user:'',
+            cpf_user:''
         }
-        if (senha == null) {
-            setErrorSenha('')
-            error = true
-        }
-        if (nome == null) {
-            setErrorNome('')
-            error = true
-        }
-        return !error
     }
-    const salvar = () => {
-        if (validar()) {
-            Alert.alert(
-                "",
-                "Cadastro efetuado com sucesso",
-                [{ text: "OK", onPress: () => console.log("OK") }]
-            )
-        } else {
-            Alert.alert(
-                "",
-                "Cadastro não realizado faltam informações",
-                [{ text: "OK", onPress: () => console.log("OK") }])
-        }
+    userRegister = ()=>{
+        const {name_user} = this.state;
+        const {email_user} = this.state;
+        const {username_user} = this.state;
+        const {password_user} = this.state;
+        const {cpf_user} = this.state;
 
+        fetch('http://localhost:8000/src/apiReact/insert.php',{
+            method: 'POST',
+            header:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({
+                name_user:name_user,
+                username_user:username_user,
+                email_user:email_user,
+                password_user:password_user,
+                cpf_user:cpf_user,
+            })
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            alert(responseJson);
+
+        })
+        .catch((error)=>{
+            console.error(error);  
+        })
     }
-
-    return (
+    render(){
+        const validar = () => {
+            let error = false
+            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!re.test(String(email_user).toLowerCase())) {
+                error = true
+            } if (cpf_user == null) {
+                error = true
+            }
+            return !error
+        }
+        salvar = () => {
+          if (validar()) {
+              Alert.alert(
+                  "",
+                  "Cadastro efetuado com sucesso",
+                  [{ text: "OK", onPress: () => console.log("OK") }]
+              )
+          } else {
+              Alert.alert(
+                  "",
+                  "Cadastro não realizado faltam informações",
+                  [{ text: "OK", onPress: () => console.log("OK") }])
+          }
+  
+      }
+      function Combine(){
+          this.salvar();
+          this.userRegister(); 
+      }
+        return (
         <ScrollView style={{ backgroundColor: '#D3D3D3' }}>
             <View style={{}}>
                 <Header />
@@ -64,48 +89,42 @@ export default function Register() {
                         style={styles.input}
                         placeholder="Nome"
                         autoCorrect={false}
-                        onChangeText={value => setNome(value)}
-                        errorMessage={errorNome}
+                        onChangeText={name_user => this.setState({name_user})}
                     />
                     <TextInput
                         style={styles.input}
                         placeholder="Usúario"
                         autoCorrect={false}
-                        onChangeText={value => setUsuario(value)}
-
+                        onChangeText={username_user => this.setState({username_user})}
                     />
                     <TextInput
                         style={styles.input}
                         placeholder="E-mail"
                         autoCorrect={false}
-                        onChangeText={value => setEmail(value)}
+                        onChangeText={email_user => this.setState({email_user})}
                         keyboardType="email-address"
-                        errorMessage={errorEmail}
                     />
                     <TextInput
                         secureTextEntry={true}
-                        onChangeText={value => setSenha(value)}
                         password={true}
                         textContentType={'password'}
                         multiline={false}
                         style={styles.input}
                         placeholder="Senha"
                         autoCorrect={false}
-                        errorMessage={errorSenha}
-
+                        onChangeText={password_user => this.setState({password_user})}
                     />
                     <TextInput
                         style={styles.input}
                         placeholder="Cpf"
                         autoCorrect={false}
-                        onChangeText={value => setCpf(value)}
+                        onChangeText={cpf_user => this.setState({cpf_user})}
                         keyboardType="number-pad"
                         maxLength={11}
-                        errorMessage={errorCpf}
+                
                     />
                     <TouchableOpacity style={styles.btnSubmit}
-                        onPress={salvar}
-                    >
+                     onPress={this.Combine}>
                         <Text style={styles.TextSubmit}>Cadastrar</Text>
                     </TouchableOpacity>
                 </View>
@@ -114,7 +133,7 @@ export default function Register() {
         </ScrollView>
 
     )
-}
+}}
 const styles = StyleSheet.create({
     container: {
         flex: 1,

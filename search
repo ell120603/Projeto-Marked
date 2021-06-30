@@ -297,3 +297,105 @@ try{
 }
 
 ?>
+validar
+ const [email, setEmail] = useState(null)
+    const [nome, setNome] = useState(null)
+    const [usuario, setUsuario] = useState(null)
+    const [cpf, setCpf] = useState(null)
+    const [senha, setSenha] = useState(null)
+    const [errorEmail, setErrorEmail] = useState(null)
+    const [errorNome, setErrorNome] = useState(null)
+    const [errorCpf, setErrorCpf] = useState(null)
+    const [errorSenha, setErrorSenha] = useState(null)
+    const validar = () => {
+          let error = false
+          const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if (!re.test(String(email).toLowerCase())) {
+              setErrorEmail("prencha seu email")
+              error = true
+          } if (cpf == null) {
+              setErrorCpf('')
+              error = true
+          }
+          if (senha == null) {
+              setErrorSenha('')
+              error = true
+          }
+          if (nome == null) {
+              setErrorNome('')
+              error = true
+          }
+          return !error
+      }
+    const salvar = () => {
+        if (validar()) {
+            Alert.alert(
+                "",
+                "Cadastro efetuado com sucesso",
+                [{ text: "OK", onPress: () => console.log("OK") }]
+            )
+        } else {
+            Alert.alert(
+                "",
+                "Cadastro não realizado faltam informações",
+                [{ text: "OK", onPress: () => console.log("OK") }])
+        }
+
+    }
+    view
+     <ScrollView style={{ backgroundColor: '#D3D3D3' }}>
+            <View style={{}}>
+                <Header />
+            </View>
+            <KeyboardAvoidingView style={styles.container}>
+
+                <View style={styles.containerInput}>
+                    <Text style={styles.title}>
+                        Fazer Cadastro
+                    </Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Nome"
+                        autoCorrect={false}
+                        onChangeText={value => setNome(value)}
+                        errorMessage={errorNome}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Usúario"
+                        autoCorrect={false}
+                        onChangeText={value => setUsuario(value)}
+
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="E-mail"
+                        autoCorrect={false}
+                        onChangeText={value => setEmail(value)}
+                        keyboardType="email-address"
+                        errorMessage={errorEmail}
+                    />
+                    <TextInput
+                        secureTextEntry={true}
+                        onChangeText={value => setSenha(value)}
+                        password={true}
+                        textContentType={'password'}
+                        multiline={false}
+                        style={styles.input}
+                        placeholder="Senha"
+                        autoCorrect={false}
+                        errorMessage={errorSenha}
+
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Cpf"
+                        autoCorrect={false}
+                        onChangeText={value => setCpf(value)}
+                        keyboardType="number-pad"
+                        maxLength={11}
+                        errorMessage={errorCpf}
+                    />
+                    <TouchableOpacity style={styles.btnSubmit}
+                        onPress={salvar}
+                    >

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, } from 'react'
 import {
     Text, StyleSheet, View, Image, TextInput, TouchableOpacity, KeyboardAvoidingView,
     SafeAreaView, Picker, Alert
@@ -99,6 +99,7 @@ export default function Ajuda() {
                         autoCorrect={false}
                         onChangeText={value => setAsk(value)}
                         errorMessage={errorAsk}
+                        maxLength={1000}
                     />
                     <TouchableOpacity style={styles.button}
                         onPress={enviar}

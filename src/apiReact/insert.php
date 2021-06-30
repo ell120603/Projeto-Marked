@@ -2,7 +2,6 @@
 include 'conexao.php';
 $json = file_get_contents('php://input');
 $obj = json_decode($json,true);
-
 $name_user = $obj['name_user'];
 $email_user = $obj['email_user'];
 $username_user = $obj['username_user'];
@@ -17,5 +16,4 @@ if(mysqli_query
      echo json_encode('Não inserido');
  }
  mysqli_close($link);
-
 ?>
